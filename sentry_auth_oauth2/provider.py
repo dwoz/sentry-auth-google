@@ -8,20 +8,20 @@ from .constants import (
     AUTHORIZE_URL, ACCESS_TOKEN_URL, CLIENT_ID, CLIENT_SECRET, DATA_VERSION,
     SCOPE
 )
-from .views import FetchUser, GoogleConfigureView
+from .views import FetchUser, Oauth2ConfigureView
 
 
-class GoogleOAuth2Login(OAuth2Login):
+class OAuth2Login(OAuth2Login):
     authorize_url = AUTHORIZE_URL
     client_id = CLIENT_ID
     scope = SCOPE
 
     def __init__(self, domain=None):
         self.domain = domain
-        super(GoogleOAuth2Login, self).__init__()
+        super(OAuth2Login, self).__init__()
 
     def get_authorize_params(self, state, redirect_uri):
-        params = super(GoogleOAuth2Login, self).get_authorize_params(
+        params = super(OAuth2Login, self).get_authorize_params(
             state, redirect_uri
         )
         # TODO(dcramer): ideally we could look at the current resulting state
@@ -32,8 +32,8 @@ class GoogleOAuth2Login(OAuth2Login):
         return params
 
 
-class GoogleOAuth2Provider(OAuth2Provider):
-    name = 'Google'
+class OAuth2Provider(OAuth2Provider):
+    name = 'Oauth2'
     client_id = CLIENT_ID
     client_secret = CLIENT_SECRET
 
@@ -48,14 +48,14 @@ class GoogleOAuth2Provider(OAuth2Provider):
         else:
             version = None
         self.version = version
-        super(GoogleOAuth2Provider, self).__init__(**config)
+        super(OAuth2Provider, self).__init__(**config)
 
     def get_configure_view(self):
-        return GoogleConfigureView.as_view()
+        return Oauth2ConfigureView.as_view()
 
     def get_auth_pipeline(self):
         return [
-            GoogleOAuth2Login(domain=self.domain),
+            OAuth2Login(domain=self.domain),
             OAuth2Callback(
                 access_token_url=ACCESS_TOKEN_URL,
                 client_id=self.client_id,

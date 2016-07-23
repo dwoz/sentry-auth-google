@@ -10,7 +10,7 @@ from .constants import (
 )
 from .utils import urlsafe_b64decode
 
-logger = logging.getLogger('sentry.auth.google')
+logger = logging.getLogger('sentry.auth.oauth2')
 
 
 class FetchUser(AuthView):
@@ -65,9 +65,9 @@ class FetchUser(AuthView):
         return helper.next_step()
 
 
-class GoogleConfigureView(ConfigureView):
+class Oauth2ConfigureView(ConfigureView):
     def dispatch(self, request, organization, auth_provider):
-        return self.render('sentry_auth_google/configure.html')
+        return self.render('sentry_auth_oauth2/configure.html')
 
 
 def extract_domain(email):
