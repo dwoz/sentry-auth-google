@@ -15,7 +15,7 @@ ERR_INVALID_DOMAIN = 'The domain for your auth account (%s) is not allowed to au
 
 ERR_INVALID_RESPONSE = 'Unable to fetch user information from auth.  Please check the log.'
 
-SCOPE = 'email'
+SCOPE = 'openid email'
 
 DOMAIN_BLOCKLIST = frozenset(getattr(settings, 'OAUTH2_DOMAIN_BLOCKLIST', ['gmail.com']) or [])
 
