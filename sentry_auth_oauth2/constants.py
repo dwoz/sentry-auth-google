@@ -3,9 +3,9 @@ from __future__ import absolute_import, print_function
 from django.conf import settings
 
 
-AUTHORIZE_URL = 'https://auth.traxtech.com/oauth2/auth'
+AUTHORIZE_URL = getattr(settings, 'OAUTH2_AUTH_URL', '')
 
-ACCESS_TOKEN_URL = 'https://auth.traxtech.com/oauth2/token'
+ACCESS_TOKEN_URL = getattr(settings, 'OAUTH2_TOKEN_URL', '')
 
 CLIENT_ID = getattr(settings, 'OAUTH2_CLIENT_ID', None)
 
