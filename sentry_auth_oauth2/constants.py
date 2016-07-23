@@ -19,4 +19,4 @@ SCOPE = 'openid email'
 
 DOMAIN_BLOCKLIST = frozenset(getattr(settings, 'OAUTH2_DOMAIN_BLOCKLIST', ['gmail.com']) or [])
 
-DATA_VERSION = '1'
+DATA_VERSION = getattr(settings, 'OAUTH2_DATA_VERSION', None)
