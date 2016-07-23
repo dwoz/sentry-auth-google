@@ -29,7 +29,7 @@ class OAuth2Login(OAuth2Login):
         # we should re-prompt them a second time with ``approval_prompt=force``
         params['approval_prompt'] = 'force'
         params['access_type'] = 'offline'
-        params['response_type'] = 'code id_token'
+        params['response_type'] = 'token id_token'
         return params
 
 
